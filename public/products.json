@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Apple iPhone 12",
+    "vendor": "Apple",
+    "year": 2020,
+    "diagonal": 6.1,
+    "country": "Китай",
+    "memory": 128,
+    "freq": 60,
+    "nfc": 0,
+    "ecim": 1,
+    "wcharg": 1,
+    "price": 81990,
+    "img": "iPhone12.jpeg"
+  },
+
+  {
+    "name": "Xiaomi Mi 11 Lite",
+    "vendor": "Xiaomi",
+    "year": 2021,
+    "diagonal": 6.55,
+    "country": "Китай",
+    "memory": 128,
+    "freq": 90,
+    "nfc": 1,
+    "ecim": 1,
+    "wcharg": 0,
+    "price": 27490,
+    "img": "XiaomiMi11Lite.jpeg"
+  },
+
+  {
+    "name": "Samsung Galaxy A72",
+    "vendor": "Samsung",
+    "year": 2021,
+    "diagonal": 6.7,
+    "country": "Вьетнам",
+    "memory": 128,
+    "freq": 90,
+    "nfc": 1,
+    "ecim": 0,
+    "wcharg": 1,
+    "price": 32890,
+    "img": "SamsungGalaxyA72.jpeg"
+  }
+]
