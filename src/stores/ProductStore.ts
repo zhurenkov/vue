@@ -54,19 +54,54 @@ export const useProductStore = defineStore('productStore', {
         iw: 181,
         ih: 240,
       },
+      {
+        id: 'iPhoneXr',
+        name: 'Apple iPhone Xr',
+        vendor: 'Apple',
+        year: 2018,
+        diagonal: 6.1,
+        country: 'Китай',
+        memory: 64,
+        freq: 60,
+        nfc: true,
+        esim: false,
+        wcharg: true,
+        price: 25000,
+        iw: 130,
+        ih: 240,
+      },
+      {
+        id: 'Realme8Pro',
+        name: 'Realme 8Pro',
+        vendor: 'Realme',
+        year: 2021,
+        diagonal: 6.4,
+        country: 'Китай',
+        memory: 128,
+        freq: 60,
+        nfc: true,
+        esim: false,
+        wcharg: false,
+        price: 24990,
+        iw: 113,
+        ih: 240,
+      },
+      {
+        id: 'SamsungGalaxyS21',
+        name: 'Samsung Galaxy S21',
+        vendor: 'Samsung',
+        year: 2021,
+        diagonal: 6.2,
+        country: 'Южная Корея',
+        memory: 256,
+        freq: 120,
+        nfc: true,
+        esim: true,
+        wcharg: true,
+        price: 28075,
+        iw: 115,
+        ih: 240,
+      },
     ],
   }),
 })
-
-/*
-export const useProductStore = defineStore('product', () => {
-  const count = ref(0)
-  const name = ref('Apple iPhone 12')
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
-  }
-
-  return { count, name, doubleCount, increment }
-})
-*/

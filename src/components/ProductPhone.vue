@@ -106,6 +106,26 @@ let difproduct = []
 //difproduct = allproduct.slice(1)
 difproduct = allproduct.slice(Number(numdif))
 console.log(difproduct)
+function selectshow() {
+  const elem = document.getElementById('selectImg')
+  if (elem) {
+    elem.style.display = 'none'
+  }
+  const elem2 = document.getElementById('popgroups0')
+  if (elem2) {
+    elem2.style.display = 'block'
+  }
+}
+function selecthide() {
+  const elem = document.getElementById('selectImg')
+  if (elem) {
+    elem.style.display = 'none'
+  }
+  const elem2 = document.getElementById('popgroups1')
+  if (elem2) {
+    elem2.style.display = 'block'
+  }
+}
 </script>
 
 <template>
@@ -131,17 +151,14 @@ console.log(difproduct)
         <tr id="firstrow">
           <td>
             <fieldset id="viewDiffers">
-              <!--<input type="checkbox" onclick="viewDiffers();" /> Показать различия-->
+              <!--<input type="checkbox" onclick="viewDiffers();" /> Показать различия
+                           v-for="n in numdif"
+-->
               <input type="checkbox" @change="difnot = !difnot" />
               Показать различия
             </fieldset>
           </td>
-          <td
-            class="selected"
-            v-for="product of productStore.products"
-            :key="product.id"
-            :product="product"
-          >
+          <td class="selected" v-for="product of difproduct" :key="product.id" :product="product">
             <figure>
               <img
                 :src="`/img/${product.id}.jpeg`"
@@ -153,15 +170,15 @@ console.log(difproduct)
             </figure>
             <!--<SelectSearch> <cool-select v-model="selected" :items="items" /></SelectSearch>-->
             <img
-              class="selectImg"
+              id="selectImg"
               src="/img/selectProd.svg"
-              @click="viewfieldset = !viewfieldset"
+              @click="(selectshow(), (viewfieldset = !viewfieldset))"
               v-show="!viewfieldset"
             />
             <fieldset
-              class="selectProd"
+              id="selectProd"
               v-show="viewfieldset"
-              @click="viewfieldset = !viewfieldset"
+              @click="(selecthide(), (viewfieldset = !viewfieldset))"
             >
               <input className="phone-search" type="text" />
               <select size="3" id="phoneList">
@@ -309,6 +326,7 @@ figure {
   margin: 0;
   padding: 5px;
   text-align: center;
+  min-width: 160px;
 }
 
 figcaption {
@@ -329,15 +347,16 @@ select {
   text-decoration: underline;
 }
 
-.selectProd {
+#selectProd {
   text-align: right;
-  width: 10em;
+  width: 0px;
+  height: 0px;
   position: relative;
   z-index: 2;
   left: 200px;
   bottom: 180px;
 }
-.selectImg {
+#selectImg {
   position: relative;
   left: 100px;
   bottom: 130px;

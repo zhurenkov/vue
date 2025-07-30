@@ -33,9 +33,9 @@ a {
     /*
     display: grid;
     grid-template-columns: 1fr;
+    max-width: 1280px;
     */
     padding: 0 2rem;
-    max-width: 1280px;
     margin: 0 auto;
     padding: 2rem;
     font-weight: normal;
