@@ -104,7 +104,7 @@ let difproduct = []
 //difproduct = allproduct
 //difproduct = allproduct.concat(allproduct[1])
 //difproduct = allproduct.slice(1)
-difproduct = allproduct.slice(Number(numdif))
+difproduct = allproduct.slice(0, numdif.value)
 console.log(difproduct)
 function selectshow() {
   const elem = document.getElementById('selectImg')
@@ -132,17 +132,38 @@ function selecthide() {
   <h1>Смартфоны</h1>
   <p id="colviews">
     Отобразить товары:
-    <span @click="numdif = 2" :id="numdif == 2 ? `seldif` : ``">2</span>&nbsp;
-    <span @click="numdif = 3" :id="numdif == 3 ? `seldif` : ``">3</span>&nbsp;
-    <span @click="numdif = 4" :id="numdif == 4 ? `seldif` : ``">4</span>&nbsp;
-    <span @click="numdif = 5" :id="numdif == 5 ? `seldif` : ``">5</span>&nbsp;
-    <span @click="numdif = 6" :id="numdif == 6 ? `seldif` : ``">6</span>
+    <span
+      @click="((numdif = 2), (difproduct = allproduct.slice(0, numdif)))"
+      :id="numdif == 2 ? `seldif` : ``"
+      >2</span
+    >&nbsp;
+    <span
+      @click="((numdif = 3), (difproduct = allproduct.slice(0, numdif)))"
+      :id="numdif == 3 ? `seldif` : ``"
+      >3</span
+    >&nbsp;
+    <span
+      @click="((numdif = 4), (difproduct = allproduct.slice(0, numdif)))"
+      :id="numdif == 4 ? `seldif` : ``"
+      >4</span
+    >&nbsp;
+    <span
+      @click="((numdif = 5), (difproduct = allproduct.slice(0, numdif)))"
+      :id="numdif == 5 ? `seldif` : ``"
+      >5</span
+    >&nbsp;
+    <span
+      @click="((numdif = 6), (difproduct = allproduct.slice(0, numdif)))"
+      :id="numdif == 6 ? `seldif` : ``"
+      >6</span
+    >
   </p>
   <!--<div>
     {{ difproduct }}
     {{ productStore.products[0] }}
-  </div>-->
-  <!--<div>
+    {{ Number(numdif) }}
+  </div>
+  <div>
     <v-select no-drop taggable multiple :select-on-key-codes="[188, 13]" />
   </div>-->
   <main id="app">
@@ -196,7 +217,7 @@ function selecthide() {
       <tbody>
         <tr v-if="difnot">
           <th>Производитель</th>
-          <td v-for="product of productStore.products" :key="product.id" :product="product">
+          <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.vendor }}
             <!--{{ difnot }} {{ productSet.size }}-->
           </td>
@@ -204,68 +225,68 @@ function selecthide() {
         <!---->
         <tr v-else-if="productSetUniq(product.vendor) > 1">
           <th>Производитель</th>
-          <td v-for="product of productStore.products" :key="product.id" :product="product">
+          <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.vendor }} {{ difnot }}
           </td>
         </tr>
         <tr v-if="difnot">
           <th>Год релиза</th>
-          <td v-for="product of productStore.products" :key="product.id" :product="product">
+          <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.year }}
             <!--{{ difnot }} {{ productSet.size }}-->
           </td>
         </tr>
         <!--<tr v-else-if="productSetUniq(`${product.year}`) > 1">
           <th>Год релиза</th>
-          <td v-for="product of productStore.products" :key="product.id" :product="product">
+          <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.year }} {{ difnot }}
           </td>
         </tr>-->
         <tr>
           <th>Диагональ экрана (дюйм)</th>
-          <td v-for="product of productStore.products" :key="product.id" :product="product">
+          <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.diagonal }}
           </td>
         </tr>
         <tr>
           <th>Страна-производитель</th>
-          <td v-for="product of productStore.products" :key="product.id" :product="product">
+          <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.country }}
           </td>
         </tr>
         <tr>
           <th>Объём памяти</th>
-          <td v-for="product of productStore.products" :key="product.id" :product="product">
+          <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.memory }}
           </td>
         </tr>
         <tr>
           <th>Частота обновления экрана</th>
-          <td v-for="product of productStore.products" :key="product.id" :product="product">
+          <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.freq }}
           </td>
         </tr>
         <tr>
           <th>NFC</th>
-          <td v-for="product of productStore.products" :key="product.id" :product="product">
+          <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.nfc }}
           </td>
         </tr>
         <tr>
           <th>Поддержка ESIM</th>
-          <td v-for="product of productStore.products" :key="product.id" :product="product">
+          <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.esim }}
           </td>
         </tr>
         <tr>
           <th>Поддержка беспроводной зарядки</th>
-          <td v-for="product of productStore.products" :key="product.id" :product="product">
+          <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.wcharg }}
           </td>
         </tr>
         <tr>
           <th>Стоимость</th>
-          <td v-for="product of productStore.products" :key="product.id" :product="product">
+          <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.price }}
           </td>
         </tr>
