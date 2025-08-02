@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { useProductStore } from '@/stores/ProductStore'
 //import { useProductStore } from '@/data/products.json'
 //import SelectSearch from '@/components/SelectSearch.vue'
@@ -31,20 +31,6 @@ interface productStore {
 /*
 import { useDifproductStore } from '@/stores/DifproductStore'
 const difproductStore = useDifproductStore()
-interface difproductStore {
-  id: number
-  name: string
-  vendor: string
-  year: number
-  diagonal: number
-  country: string
-  memory: number
-  freq: number
-  nfc: boolean
-  esim: boolean
-  wcharg: boolean
-  price: number
-}
 console.log(difproductStore)
 //useDifproductStore = productStore
 */
@@ -91,41 +77,84 @@ const difnot = ref(true)
 console.log(difnot.value)
 const numdif = ref(3)
 console.log(numdif.value)
-const viewfieldset = ref(false)
-
+//type viewer = [id: string, isVisible: boolean]
+/*
+interface viewer {
+  [key: string]: boolean
+}
+const viewfieldset: viewer[] //ref(false)
+*/
+const viewfieldset: { [id: string]: boolean } = reactive({})
+//viewfieldset["iP"]=true
+//const shown = ref()
+function logger(arg: string) {
+  console.log(arg)
+}
 /* Object
 let difproduct = new Object()
 difproduct = productStore.products
 */
 //import { reactive } from 'vue'
+
 let allproduct = [] //new Array.from({length: numdif})
 allproduct = productStore.products
 let difproduct = []
+//let otherproduct: productStore[] = []
+let otherproduct = []
 //difproduct = allproduct
 //difproduct = allproduct.concat(allproduct[1])
 //difproduct = allproduct.slice(1)
 difproduct = allproduct.slice(0, numdif.value)
 console.log(difproduct)
+//let id=ref()
+//let productid: { id: string} = {difproduct.id};
+//productid[id]=difproduct.id
+/*function otherproductlist(all: [], other: []) {
+  other = all
+  for (const prod of other) {
+    // otherproduct.id.indexOf(prod.id)
+    const productin = other.findIndex((productin) => productin.id === prod.id)
+    console.log(productin)
+    other = other.slice(productin)
+    //  alert(`Исключаем: ${prod.id} ${productin}`)
+    console.log(other)
+  }
+  other = all.slice(0, numdif.value)
+  console.log(other)
+}*/
+otherproduct = allproduct
+for (const prod of difproduct) {
+  // otherproduct.id.indexOf(prod.id)
+  const productin = otherproduct.findIndex((productin) => productin.id === prod.id)
+  console.log(productin)
+  otherproduct = otherproduct.slice(productin)
+  //alert(`Исключаем: ${prod.id} ${productin}`)
+  console.log(otherproduct)
+}
+otherproduct = otherproduct.slice(0, numdif.value)
+console.log(otherproduct)
+/*
 function selectshow() {
-  const elem = document.getElementById('selectImg')
+  const elem = document.getElementById('`${product.id}Img`')
   if (elem) {
     elem.style.display = 'none'
   }
-  const elem2 = document.getElementById('popgroups0')
+  const elem2 = document.getElementById('`${product.id}Sel`')
   if (elem2) {
     elem2.style.display = 'block'
   }
 }
 function selecthide() {
-  const elem = document.getElementById('selectImg')
+  const elem = document.getElementById('`${product.id}Sel`')
   if (elem) {
     elem.style.display = 'none'
   }
-  const elem2 = document.getElementById('popgroups1')
+  const elem2 = document.getElementById('`${product.id}Img`')
   if (elem2) {
     elem2.style.display = 'block'
   }
 }
+*/
 </script>
 
 <template>
@@ -138,21 +167,25 @@ function selecthide() {
       >2</span
     >&nbsp;
     <span
+      v-show="allproduct.length >= 3"
       @click="((numdif = 3), (difproduct = allproduct.slice(0, numdif)))"
       :id="numdif == 3 ? `seldif` : ``"
       >3</span
     >&nbsp;
     <span
+      v-show="allproduct.length >= 4"
       @click="((numdif = 4), (difproduct = allproduct.slice(0, numdif)))"
       :id="numdif == 4 ? `seldif` : ``"
       >4</span
     >&nbsp;
     <span
+      v-show="allproduct.length >= 5"
       @click="((numdif = 5), (difproduct = allproduct.slice(0, numdif)))"
       :id="numdif == 5 ? `seldif` : ``"
       >5</span
     >&nbsp;
     <span
+      v-show="allproduct.length >= 6"
       @click="((numdif = 6), (difproduct = allproduct.slice(0, numdif)))"
       :id="numdif == 6 ? `seldif` : ``"
       >6</span
@@ -191,24 +224,36 @@ function selecthide() {
             </figure>
             <!--<SelectSearch> <cool-select v-model="selected" :items="items" /></SelectSearch>-->
             <img
-              id="selectImg"
+              class="selectImg"
+              :id="`${product.id}Img`"
               src="/img/selectProd.svg"
-              @click="(selectshow(), (viewfieldset = !viewfieldset))"
-              v-show="!viewfieldset"
-            />
+              @click="
+                ((viewfieldset[product.id] = !viewfieldset[product.id]),
+                logger(product.id + viewfieldset[product.id].toString()),
+                console.log(viewfieldset))
+              "
+              v-show="!viewfieldset[product.id]"
+            /><!--{{ viewfieldset[product.id] }}-->
             <fieldset
-              id="selectProd"
-              v-show="viewfieldset"
-              @click="(selecthide(), (viewfieldset = !viewfieldset))"
+              class="selectProd"
+              :id="`${product.id}Sel`"
+              v-show="viewfieldset[product.id]"
+              @click="
+                ((viewfieldset[product.id] = !viewfieldset[product.id]),
+                logger(viewfieldset[product.id].toString()))
+                //                ,otherproductlist(allproduct, otherproduct)
+              "
             >
               <input className="phone-search" type="text" />
-              <select size="3" id="phoneList">
-                <option value="iPhone12">Apple iPhone 12</option>
-                <option value="iPhoneXr">Apple iPhone Xr</option>
-                <option value="XiaomiMi11Lite Гена">Xiaomi Mi 11 Lite</option>
-                <option value="Realme8Pro">Realme 8 Pro</option>
-                <option value="SamsungGalaxyA72">Samsung Galaxy A72</option>
-                <option value="SamsungGalaxyS21">Samsung Galaxy S21</option>
+              <select size="3" :id="`${product.id}List`">
+                <option
+                  v-for="otherproduct of otherproduct"
+                  :key="otherproduct.id"
+                  :product="otherproduct"
+                  value="otherproduct.id"
+                >
+                  {{ otherproduct.name }}
+                </option>
               </select>
             </fieldset>
           </td>
@@ -368,7 +413,7 @@ select {
   text-decoration: underline;
 }
 
-#selectProd {
+.selectProd {
   text-align: right;
   width: 0px;
   height: 0px;
@@ -377,7 +422,7 @@ select {
   left: 200px;
   bottom: 180px;
 }
-#selectImg {
+.selectImg {
   position: relative;
   left: 100px;
   bottom: 130px;
