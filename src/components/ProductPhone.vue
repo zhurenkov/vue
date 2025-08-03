@@ -70,15 +70,15 @@ function productSetUniq(item: string) {
   //  productSet.clear()
   productSet.add(item)
   productSet.add('item')
-  console.log(productSet)
+  //  console.log(productSet)
   return 0
   //productSet.size
 }
 
 const difnot = ref(true)
-console.log(difnot.value)
+//console.log(difnot.value)
 const numdif = ref(3)
-console.log(numdif.value)
+//console.log(numdif.value)
 //type viewer = [id: string, isVisible: boolean]
 /*
 interface viewer {
@@ -113,26 +113,41 @@ function otherproductlist() {
   otherproduct = allproduct
   for (const prod of difproduct) {
     const productin = otherproduct.findIndex((productin) => productin.id === prod.id)
-    console.log(productin)
+    //    console.log(productin)
     otherproduct = otherproduct.slice(productin + 1)
     //  alert(`Исключаем: ${prod.id} ${productin} ${otherproduct.length}`)
-    console.log(otherproduct)
+    //    console.log(otherproduct)
   }
 }
 otherproductlist()
-//otherproductlist(allproduct, difproduct, otherproduct)
-/*
-function otherproductlist(all: productStore[], dif: productStore[], other: productStore[]) {
-  other = all
-  for (const prod of dif) {
-    const productin = other.findIndex((productin) => productin.id === prod.id)
-    console.log(productin)
-    other = other.slice(productin + 1)
-    //  alert(`Исключаем: ${prod.id} ${productin} ${otherproduct.length}`)
-    console.log(other)
-  }
+
+function changeproductlist(productold: string, productnew: string) {
+  //const ind = ref()
+  //let count = 0
+  //  let newprod: productStore | undefined
+  //for (const prod of difproduct) {
+  const productin = difproduct.findIndex((productin) => productin.id === productold)
+  console.log(productin)
+  //ind.value = productin
+  //count++
+  //  alert(`№: ${count}`)
+  //}
+  //for (const prod of otherproduct) {
+  const newprod = otherproduct.find((newprod) => newprod.id === productnew)
+  //}
+  if (typeof newprod !== 'undefined') difproduct.splice(productin, 1, newprod)
+  //  alert(`Заменяем: ${productold} на ${productin} позиции на ${productnew}`)
+  //  alert(`Заменяем: ${newprod}`)
+  console.log(newprod)
+  //  }
+  //}
+  //otherproduct = allproduct
+  //otherproductlist()
+  //console.log(otherproduct)
+  console.log(difproduct)
 }
 
+/*
 otherproduct = allproduct
 for (const prod of difproduct) {
   // otherproduct.id.indexOf(prod.id)
@@ -240,20 +255,13 @@ function selecthide() {
               @click="
                 ((viewfieldset[product.id] = !viewfieldset[product.id]),
                 logger(product.id + viewfieldset[product.id].toString()),
-                console.log(viewfieldset))
+                otherproductlist(),
+                //  console.log(viewfieldset),
+                console.log(otherproduct))
               "
               v-show="!viewfieldset[product.id]"
             /><!--{{ viewfieldset[product.id] }}-->
-            <fieldset
-              class="selectProd"
-              :id="`${product.id}Sel`"
-              v-show="viewfieldset[product.id]"
-              @click="
-                ((viewfieldset[product.id] = !viewfieldset[product.id]),
-                logger(viewfieldset[product.id].toString()))
-                //                ,otherproductlist(allproduct, otherproduct)
-              "
-            >
+            <fieldset class="selectProd" :id="`${product.id}Sel`" v-show="viewfieldset[product.id]">
               <input className="phone-search" type="text" />
               <select size="3" :id="`${product.id}List`">
                 <option
@@ -261,6 +269,11 @@ function selecthide() {
                   :key="otherproduct.id"
                   :product="otherproduct"
                   value="otherproduct.id"
+                  @click="
+                    ((viewfieldset[product.id] = !viewfieldset[product.id]),
+                    logger(viewfieldset[product.id].toString()),
+                    changeproductlist(product.id, otherproduct.id))
+                  "
                 >
                   {{ otherproduct.name }}
                 </option>
