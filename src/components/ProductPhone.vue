@@ -127,11 +127,11 @@ for (const prod of difproduct) {
   // otherproduct.id.indexOf(prod.id)
   const productin = otherproduct.findIndex((productin) => productin.id === prod.id)
   console.log(productin)
-  otherproduct = otherproduct.slice(productin)
-  //alert(`Исключаем: ${prod.id} ${productin}`)
+  otherproduct = otherproduct.slice(productin + 1)
+  alert(`Исключаем: ${prod.id} ${productin} ${otherproduct.length}`)
   console.log(otherproduct)
 }
-otherproduct = otherproduct.slice(0, numdif.value)
+//otherproduct = otherproduct.slice(0, numdif.value)
 console.log(otherproduct)
 /*
 function selectshow() {
