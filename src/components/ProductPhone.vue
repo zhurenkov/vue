@@ -15,7 +15,7 @@ const props = defineProps({
 console.log(props.product)
 
 interface productStore {
-  id: number
+  id: string
   name: string
   vendor: string
   year: number
@@ -27,6 +27,8 @@ interface productStore {
   esim: boolean
   wcharg: boolean
   price: number
+  iw: number
+  ih: number
 }
 /*
 import { useDifproductStore } from '@/stores/DifproductStore'
@@ -96,44 +98,52 @@ difproduct = productStore.products
 */
 //import { reactive } from 'vue'
 
-let allproduct = [] //new Array.from({length: numdif})
+let allproduct: productStore[] = [] //new Array.from({length: numdif})
 allproduct = productStore.products
-let difproduct = []
+let difproduct: productStore[] = []
 //let otherproduct: productStore[] = []
-let otherproduct = []
-//difproduct = allproduct
-//difproduct = allproduct.concat(allproduct[1])
-//difproduct = allproduct.slice(1)
+let otherproduct: productStore[] = []
 difproduct = allproduct.slice(0, numdif.value)
 console.log(difproduct)
 //let id=ref()
 //let productid: { id: string} = {difproduct.id};
 //productid[id]=difproduct.id
-/*function otherproductlist(all: [], other: []) {
+otherproduct = allproduct
+function otherproductlist() {
+  otherproduct = allproduct
+  for (const prod of difproduct) {
+    const productin = otherproduct.findIndex((productin) => productin.id === prod.id)
+    console.log(productin)
+    otherproduct = otherproduct.slice(productin + 1)
+    //  alert(`Исключаем: ${prod.id} ${productin} ${otherproduct.length}`)
+    console.log(otherproduct)
+  }
+}
+otherproductlist()
+//otherproductlist(allproduct, difproduct, otherproduct)
+/*
+function otherproductlist(all: productStore[], dif: productStore[], other: productStore[]) {
   other = all
-  for (const prod of other) {
-    // otherproduct.id.indexOf(prod.id)
+  for (const prod of dif) {
     const productin = other.findIndex((productin) => productin.id === prod.id)
     console.log(productin)
-    other = other.slice(productin)
-    //  alert(`Исключаем: ${prod.id} ${productin}`)
+    other = other.slice(productin + 1)
+    //  alert(`Исключаем: ${prod.id} ${productin} ${otherproduct.length}`)
     console.log(other)
   }
-  other = all.slice(0, numdif.value)
-  console.log(other)
-}*/
+}
+
 otherproduct = allproduct
 for (const prod of difproduct) {
   // otherproduct.id.indexOf(prod.id)
   const productin = otherproduct.findIndex((productin) => productin.id === prod.id)
   console.log(productin)
   otherproduct = otherproduct.slice(productin + 1)
-  alert(`Исключаем: ${prod.id} ${productin} ${otherproduct.length}`)
+//  alert(`Исключаем: ${prod.id} ${productin} ${otherproduct.length}`)
   console.log(otherproduct)
 }
 //otherproduct = otherproduct.slice(0, numdif.value)
-console.log(otherproduct)
-/*
+
 function selectshow() {
   const elem = document.getElementById('`${product.id}Img`')
   if (elem) {
@@ -162,31 +172,31 @@ function selecthide() {
   <p id="colviews">
     Отобразить товары:
     <span
-      @click="((numdif = 2), (difproduct = allproduct.slice(0, numdif)))"
+      @click="((numdif = 2), (difproduct = allproduct.slice(0, numdif)), otherproductlist())"
       :id="numdif == 2 ? `seldif` : ``"
       >2</span
     >&nbsp;
     <span
       v-show="allproduct.length >= 3"
-      @click="((numdif = 3), (difproduct = allproduct.slice(0, numdif)))"
+      @click="((numdif = 3), (difproduct = allproduct.slice(0, numdif)), otherproductlist())"
       :id="numdif == 3 ? `seldif` : ``"
       >3</span
     >&nbsp;
     <span
       v-show="allproduct.length >= 4"
-      @click="((numdif = 4), (difproduct = allproduct.slice(0, numdif)))"
+      @click="((numdif = 4), (difproduct = allproduct.slice(0, numdif)), otherproductlist())"
       :id="numdif == 4 ? `seldif` : ``"
       >4</span
     >&nbsp;
     <span
       v-show="allproduct.length >= 5"
-      @click="((numdif = 5), (difproduct = allproduct.slice(0, numdif)))"
+      @click="((numdif = 5), (difproduct = allproduct.slice(0, numdif)), otherproductlist())"
       :id="numdif == 5 ? `seldif` : ``"
       >5</span
     >&nbsp;
     <span
       v-show="allproduct.length >= 6"
-      @click="((numdif = 6), (difproduct = allproduct.slice(0, numdif)))"
+      @click="((numdif = 6), (difproduct = allproduct.slice(0, numdif)), otherproductlist())"
       :id="numdif == 6 ? `seldif` : ``"
       >6</span
     >
