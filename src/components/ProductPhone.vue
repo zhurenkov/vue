@@ -5,15 +5,6 @@ import { useProductStore } from '@/stores/ProductStore'
 //import SelectSearch from '@/components/SelectSearch.vue'
 const productStore = useProductStore()
 
-const props = defineProps({
-  product: {
-    type: Object,
-    required: true,
-    default: () => {},
-  },
-})
-console.log(props.product)
-
 interface productStore {
   id: string
   name: string
