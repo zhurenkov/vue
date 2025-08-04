@@ -70,9 +70,8 @@ function productSetUniq(item: string) {
   //  productSet.clear()
   productSet.add(item)
   productSet.add('item')
-  //  console.log(productSet)
-  return 0
-  //productSet.size
+  console.log(productSet)
+  return productSet.size
 }
 
 const difnot = ref(true)
