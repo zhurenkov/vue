@@ -52,6 +52,7 @@ $('#searchInput').bind('keyup', function() {
     }
 });
 */
+/*
 const productSet = new Set()
 //const productSet = new Set(productStore.products)
 //productSet.add(productStore.products)
@@ -64,7 +65,7 @@ function productSetUniq(item: string) {
   console.log(productSet)
   return productSet.size
 }
-
+*/
 const difnot = ref(true)
 //console.log(difnot.value)
 const numdif = ref(3)
@@ -279,13 +280,13 @@ function selecthide() {
             <!--{{ difnot }} {{ productSet.size }}-->
           </td>
         </tr>
-        <!---->
+        <!--
         <tr v-else-if="productSetUniq(product.vendor) > 1">
           <th>Производитель</th>
           <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.vendor }} {{ difnot }}
           </td>
-        </tr>
+        </tr>-->
         <tr v-if="difnot">
           <th>Год релиза</th>
           <td v-for="product of difproduct" :key="product.id" :product="product">
