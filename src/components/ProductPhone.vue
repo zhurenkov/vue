@@ -98,32 +98,30 @@ difproduct = productStore.products
 */
 //import { reactive } from 'vue'
 
-let allproduct: productStore[] = [] //new Array.from({length: numdif})
-allproduct = productStore.products
+//let allproduct: productStore[] = [] //new Array.from({length: numdif})
+const allproduct = productStore.products
+console.log(allproduct)
 let difproduct: productStore[] = []
 //let otherproduct: productStore[] = []
 let otherproduct: productStore[] = []
 difproduct = allproduct.slice(0, numdif.value)
-console.log(difproduct)
-//let id=ref()
-//let productid: { id: string} = {difproduct.id};
-//productid[id]=difproduct.id
-otherproduct = allproduct
+//console.log(difproduct)
 function otherproductlist() {
-  otherproduct = allproduct
+  //otherproduct = allproduct
+  otherproduct = allproduct.slice(0)
+  //  console.log(otherproduct)
+  //  console.log(difproduct)
   for (const prod of difproduct) {
     const productin = otherproduct.findIndex((productin) => productin.id === prod.id)
-    //    console.log(productin)
-    otherproduct = otherproduct.slice(productin + 1)
-    //  alert(`Исключаем: ${prod.id} ${productin} ${otherproduct.length}`)
-    //    console.log(otherproduct)
+    //  console.log(productin)
+    otherproduct.splice(productin, 1)
+    //    alert(`Исключаем: ${prod.id} ${productin} ${otherproduct.length}`)
+    //  console.log(otherproduct)
   }
 }
 otherproductlist()
 
 function changeproductlist(productold: string, productnew: string) {
-  //const ind = ref()
-  //let count = 0
   //  let newprod: productStore | undefined
   //for (const prod of difproduct) {
   const productin = difproduct.findIndex((productin) => productin.id === productold)
@@ -141,10 +139,11 @@ function changeproductlist(productold: string, productnew: string) {
   console.log(newprod)
   //  }
   //}
-  //otherproduct = allproduct
-  //otherproductlist()
-  //console.log(otherproduct)
+  otherproduct = allproduct
+  console.log(otherproduct)
   console.log(difproduct)
+  otherproductlist()
+  console.log(otherproduct)
 }
 
 /*
