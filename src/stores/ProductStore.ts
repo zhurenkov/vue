@@ -21,6 +21,8 @@ export const useProductStore = defineStore('productStore', {
         price: 81990,
         iw: 120,
         ih: 240,
+        itw: 27,
+        ith: 50,
       },
       {
         id: 'XiaomiMi11Lite',
@@ -37,6 +39,8 @@ export const useProductStore = defineStore('productStore', {
         price: 27490,
         iw: 117,
         ih: 240,
+        itw: 35,
+        ith: 50,
       },
       {
         id: 'SamsungGalaxyA72',
@@ -53,6 +57,8 @@ export const useProductStore = defineStore('productStore', {
         price: 32890,
         iw: 117,
         ih: 240,
+        itw: 38,
+        ith: 50,
       },
       {
         id: 'iPhoneXr',
@@ -69,6 +75,8 @@ export const useProductStore = defineStore('productStore', {
         price: 25000,
         iw: 123,
         ih: 240,
+        itw: 26,
+        ith: 50,
       },
       {
         id: 'Realme8Pro',
@@ -85,6 +93,8 @@ export const useProductStore = defineStore('productStore', {
         price: 24990,
         iw: 113,
         ih: 240,
+        itw: 26,
+        ith: 50,
       },
       {
         id: 'SamsungGalaxyS21',
@@ -101,6 +111,8 @@ export const useProductStore = defineStore('productStore', {
         price: 28075,
         iw: 115,
         ih: 240,
+        itw: 24,
+        ith: 50,
       },
       {
         id: 'HONORX9cSmart',
@@ -117,6 +129,8 @@ export const useProductStore = defineStore('productStore', {
         price: 23499,
         iw: 114,
         ih: 240,
+        itw: 24,
+        ith: 50,
       },
     ],
   }),

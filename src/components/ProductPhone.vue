@@ -20,6 +20,8 @@ interface productStore {
   price: number
   iw: number
   ih: number
+  itw: number
+  ith: number
 }
 /*
 import { useDifproductStore } from '@/stores/DifproductStore'
@@ -66,9 +68,11 @@ const viewfieldset: viewer[] //ref(false)
 const viewfieldset: { [id: string]: boolean } = reactive({})
 //viewfieldset["iP"]=true
 //const shown = ref()
+/*
 function logger(arg: string) {
   console.log(arg)
 }
+*/
 /* Object
 let difproduct = new Object()
 difproduct = productStore.products
@@ -303,7 +307,7 @@ function selecthide() {
           <td class="selected" v-for="product of difproduct" :key="product.id" :product="product">
             <figure>
               <img
-                :src="`/img/${product.id}.jpeg`"
+                :src="`/img/${product.id}.jpg`"
                 :alt="product.id"
                 :width="product.iw"
                 :height="product.ih"
@@ -317,10 +321,10 @@ function selecthide() {
               src="/img/selectProd.svg"
               @click="
                 ((viewfieldset[product.id] = !viewfieldset[product.id]),
-                logger(product.id + viewfieldset[product.id].toString()),
-                otherproductlist(),
+                //                logger(product.id + viewfieldset[product.id].toString()),
+                otherproductlist())
                 //  console.log(viewfieldset),
-                console.log(otherproduct))
+                //              console.log(otherproduct)
               "
               v-show="!viewfieldset[product.id] && otherproduct.length > 0"
             /><!--{{ viewfieldset[product.id] }}-->
@@ -334,12 +338,28 @@ function selecthide() {
                   value="otherproduct.id"
                   @click="
                     ((viewfieldset[product.id] = !viewfieldset[product.id]),
-                    logger(viewfieldset[product.id].toString()),
                     changeproductlist(product.id, otherproduct.id),
                     productSetUniq())
                   "
                 >
-                  {{ otherproduct.name }}
+                  <div class="options">
+                    <img
+                      src="/img/select.svg"
+                      @click="
+                        ((viewfieldset[product.id] = !viewfieldset[product.id]),
+                        changeproductlist(product.id, otherproduct.id),
+                        productSetUniq())
+                      "
+                    />
+                    <img
+                      :src="`/img/th/${otherproduct.id}.png`"
+                      :alt="otherproduct.id"
+                      :width="otherproduct.itw"
+                      :height="otherproduct.ith"
+                      @click="viewfieldset[product.id] = !viewfieldset[product.id]"
+                    />
+                    {{ otherproduct.name }}
+                  </div>
                 </option>
               </select>
             </fieldset>
@@ -513,6 +533,16 @@ select {
   position: relative;
   left: 100px;
   bottom: 130px;
+}
+select {
+  width: 200px;
+}
+.options {
+  display: inline-block;
+}
+.options img {
+  display: inline-block;
+  vertical-align: middle;
 }
 .hidden {
   visibility: hidden;
