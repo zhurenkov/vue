@@ -52,20 +52,6 @@ $('#searchInput').bind('keyup', function() {
     }
 });
 */
-/*
-const productSet = new Set()
-//const productSet = new Set(productStore.products)
-//productSet.add(productStore.products)
-//console.log(productSet)
-
-function productSetUniq(item: string) {
-  //  productSet.clear()
-  productSet.add(item)
-  productSet.add('item')
-  console.log(productSet)
-  return productSet.size
-}
-*/
 const difnot = ref(true)
 //console.log(difnot.value)
 const numdif = ref(3)
@@ -136,19 +122,81 @@ function changeproductlist(productold: string, productnew: string) {
   otherproductlist()
   console.log(otherproduct)
 }
+/*
+const productSet = new Set()
+//const productSet = new Set(productStore.products)
+//productSet.add(productStore.products)
+//console.log(productSet)
+: string
+  : number
+  : number
+  : string
+  : number
+  : number
+  : boolean
+  : boolean
+  : boolean
+  */
+const vendorUniq = ref(true)
+const yearUniq = ref(true)
+const diagonalUniq = ref(true)
+const countryUniq = ref(true)
+const memoryUniq = ref(true)
+const freqUniq = ref(true)
+const nfcUniq = ref(true)
+const esimUniq = ref(true)
+const wchargUniq = ref(true)
+const priceUniq = ref(true)
+function productSetUniq() {
+  const vendorSet = new Set()
+  vendorSet.clear()
+  const yearSet = new Set()
+  yearSet.clear()
+  const diagonalSet = new Set()
+  diagonalSet.clear()
+  const countrySet = new Set()
+  countrySet.clear()
+  const memorySet = new Set()
+  memorySet.clear()
+  const freqSet = new Set()
+  freqSet.clear()
+  const nfcSet = new Set()
+  nfcSet.clear()
+  const esimSet = new Set()
+  esimSet.clear()
+  const wchargSet = new Set()
+  wchargSet.clear()
+  const priceSet = new Set()
+  priceSet.clear()
+  for (const prod of difproduct) {
+    vendorSet.add(prod.vendor)
+    yearSet.add(prod.year)
+    diagonalSet.add(prod.diagonal)
+    countrySet.add(prod.country)
+    memorySet.add(prod.memory)
+    freqSet.add(prod.freq)
+    nfcSet.add(prod.nfc)
+    esimSet.add(prod.esim)
+    wchargSet.add(prod.wcharg)
+    priceSet.add(prod.price)
+  }
+  vendorUniq.value = vendorSet.size == 1 ? false : true
+  yearUniq.value = yearSet.size == 1 ? false : true
+  diagonalUniq.value = diagonalSet.size == 1 ? false : true
+  countryUniq.value = countrySet.size == 1 ? false : true
+  memoryUniq.value = memorySet.size == 1 ? false : true
+  freqUniq.value = freqSet.size == 1 ? false : true
+  nfcUniq.value = nfcSet.size == 1 ? false : true
+  esimUniq.value = esimSet.size == 1 ? false : true
+  wchargUniq.value = wchargSet.size == 1 ? false : true
+  priceUniq.value = priceSet.size == 1 ? false : true
+  //console.log(memorySet)
+  //console.log(memoryUniq)
+  return 0 //memorySet.size
+}
+productSetUniq()
 
 /*
-otherproduct = allproduct
-for (const prod of difproduct) {
-  // otherproduct.id.indexOf(prod.id)
-  const productin = otherproduct.findIndex((productin) => productin.id === prod.id)
-  console.log(productin)
-  otherproduct = otherproduct.slice(productin + 1)
-//  alert(`Исключаем: ${prod.id} ${productin} ${otherproduct.length}`)
-  console.log(otherproduct)
-}
-//otherproduct = otherproduct.slice(0, numdif.value)
-
 function selectshow() {
   const elem = document.getElementById('`${product.id}Img`')
   if (elem) {
@@ -177,31 +225,56 @@ function selecthide() {
   <p id="colviews">
     Отобразить товары:
     <span
-      @click="((numdif = 2), (difproduct = allproduct.slice(0, numdif)), otherproductlist())"
+      @click="
+        ((numdif = 2),
+        (difproduct = allproduct.slice(0, numdif)),
+        otherproductlist(),
+        productSetUniq())
+      "
       :id="numdif == 2 ? `seldif` : ``"
       >2</span
     >&nbsp;
     <span
       v-show="allproduct.length >= 3"
-      @click="((numdif = 3), (difproduct = allproduct.slice(0, numdif)), otherproductlist())"
+      @click="
+        ((numdif = 3),
+        (difproduct = allproduct.slice(0, numdif)),
+        otherproductlist(),
+        productSetUniq())
+      "
       :id="numdif == 3 ? `seldif` : ``"
       >3</span
     >&nbsp;
     <span
       v-show="allproduct.length >= 4"
-      @click="((numdif = 4), (difproduct = allproduct.slice(0, numdif)), otherproductlist())"
+      @click="
+        ((numdif = 4),
+        (difproduct = allproduct.slice(0, numdif)),
+        otherproductlist(),
+        productSetUniq())
+      "
       :id="numdif == 4 ? `seldif` : ``"
       >4</span
     >&nbsp;
     <span
       v-show="allproduct.length >= 5"
-      @click="((numdif = 5), (difproduct = allproduct.slice(0, numdif)), otherproductlist())"
+      @click="
+        ((numdif = 5),
+        (difproduct = allproduct.slice(0, numdif)),
+        otherproductlist(),
+        productSetUniq())
+      "
       :id="numdif == 5 ? `seldif` : ``"
       >5</span
     >&nbsp;
     <span
       v-show="allproduct.length >= 6"
-      @click="((numdif = 6), (difproduct = allproduct.slice(0, numdif)), otherproductlist())"
+      @click="
+        ((numdif = 6),
+        (difproduct = allproduct.slice(0, numdif)),
+        otherproductlist(),
+        productSetUniq())
+      "
       :id="numdif == 6 ? `seldif` : ``"
       >6</span
     >
@@ -262,7 +335,8 @@ function selecthide() {
                   @click="
                     ((viewfieldset[product.id] = !viewfieldset[product.id]),
                     logger(viewfieldset[product.id].toString()),
-                    changeproductlist(product.id, otherproduct.id))
+                    changeproductlist(product.id, otherproduct.id),
+                    productSetUniq())
                   "
                 >
                   {{ otherproduct.name }}
@@ -273,7 +347,7 @@ function selecthide() {
         </tr>
       </thead>
       <tbody>
-        <tr v-if="difnot">
+        <tr v-if="difnot || vendorUniq">
           <th>Производитель</th>
           <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.vendor }}
@@ -287,7 +361,7 @@ function selecthide() {
             {{ product.vendor }} {{ difnot }}
           </td>
         </tr>-->
-        <tr v-if="difnot">
+        <tr v-if="difnot || yearUniq">
           <th>Год релиза</th>
           <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.year }}
@@ -300,49 +374,49 @@ function selecthide() {
             {{ product.year }} {{ difnot }}
           </td>
         </tr>-->
-        <tr>
+        <tr v-if="difnot || diagonalUniq">
           <th>Диагональ экрана (дюйм)</th>
           <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.diagonal }}
           </td>
         </tr>
-        <tr>
+        <tr v-if="difnot || countryUniq">
           <th>Страна-производитель</th>
           <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.country }}
           </td>
         </tr>
-        <tr>
+        <tr v-if="difnot || memoryUniq">
           <th>Объём памяти</th>
           <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.memory }}
           </td>
         </tr>
-        <tr>
+        <tr v-if="difnot || freqUniq">
           <th>Частота обновления экрана</th>
           <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.freq }}
           </td>
         </tr>
-        <tr>
+        <tr v-if="difnot || nfcUniq">
           <th>NFC</th>
           <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.nfc }}
           </td>
         </tr>
-        <tr>
+        <tr v-if="difnot || esimUniq">
           <th>Поддержка ESIM</th>
           <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.esim }}
           </td>
         </tr>
-        <tr>
+        <tr v-if="difnot || wchargUniq">
           <th>Поддержка беспроводной зарядки</th>
           <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.wcharg }}
           </td>
         </tr>
-        <tr>
+        <tr v-if="difnot || priceUniq">
           <th>Стоимость</th>
           <td v-for="product of difproduct" :key="product.id" :product="product">
             {{ product.price }}
