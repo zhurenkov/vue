@@ -19,7 +19,7 @@ export const useProductStore = defineStore('productStore', {
         esim: true,
         wcharg: true,
         price: 81990,
-        iw: 130,
+        iw: 120,
         ih: 240,
       },
       {
@@ -35,7 +35,7 @@ export const useProductStore = defineStore('productStore', {
         esim: true,
         wcharg: false,
         price: 27490,
-        iw: 168,
+        iw: 117,
         ih: 240,
       },
       {
@@ -51,7 +51,7 @@ export const useProductStore = defineStore('productStore', {
         esim: false,
         wcharg: true,
         price: 32890,
-        iw: 181,
+        iw: 117,
         ih: 240,
       },
       {
@@ -67,7 +67,7 @@ export const useProductStore = defineStore('productStore', {
         esim: false,
         wcharg: true,
         price: 25000,
-        iw: 130,
+        iw: 123,
         ih: 240,
       },
       {

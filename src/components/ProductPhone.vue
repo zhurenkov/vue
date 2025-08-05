@@ -322,7 +322,7 @@ function selecthide() {
                 //  console.log(viewfieldset),
                 console.log(otherproduct))
               "
-              v-show="!viewfieldset[product.id]"
+              v-show="!viewfieldset[product.id] && otherproduct.length > 0"
             /><!--{{ viewfieldset[product.id] }}-->
             <fieldset class="selectProd" :id="`${product.id}Sel`" v-show="viewfieldset[product.id]">
               <input className="phone-search" type="text" />
