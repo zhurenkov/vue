@@ -340,18 +340,13 @@ function selecthide() {
                 >
                   <img
                     src="/img/select.svg"
-                    @click="
-                      ((viewfieldset[product.id] = !viewfieldset[product.id]),
-                      changeproductlist(product.id, otherproduct.id),
-                      productSetUniq())
-                    "
+                    @click="(changeproductlist(product.id, otherproduct.id), productSetUniq())"
                   />
                   <img
                     :src="`/img/th/${otherproduct.id}.png`"
                     :alt="otherproduct.id"
                     :width="otherproduct.itw"
                     :height="otherproduct.ith"
-                    @click="viewfieldset[product.id] = !viewfieldset[product.id]"
                   />
                   {{ otherproduct.name }}
                 </p>
