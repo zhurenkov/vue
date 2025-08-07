@@ -1,5 +1,7 @@
 # vue
 
+Look the actual version of this project at [Netlify](https://689436c2d5d098b2806eabfe--zhurenkovvue.netlify.app).
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
