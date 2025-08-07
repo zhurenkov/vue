@@ -330,38 +330,32 @@ function selecthide() {
             /><!--{{ viewfieldset[product.id] }}-->
             <fieldset class="selectProd" :id="`${product.id}Sel`" v-show="viewfieldset[product.id]">
               <input className="phone-search" type="text" />
-              <select size="3" :id="`${product.id}List`">
-                <option
+              <div class="options">
+                <p
                   v-for="otherproduct of otherproduct"
                   :key="otherproduct.id"
                   :product="otherproduct"
                   value="otherproduct.id"
-                  @click="
-                    ((viewfieldset[product.id] = !viewfieldset[product.id]),
-                    changeproductlist(product.id, otherproduct.id),
-                    productSetUniq())
-                  "
+                  @click="viewfieldset[product.id] = !viewfieldset[product.id]"
                 >
-                  <div class="options">
-                    <img
-                      src="/img/select.svg"
-                      @click="
-                        ((viewfieldset[product.id] = !viewfieldset[product.id]),
-                        changeproductlist(product.id, otherproduct.id),
-                        productSetUniq())
-                      "
-                    />
-                    <img
-                      :src="`/img/th/${otherproduct.id}.png`"
-                      :alt="otherproduct.id"
-                      :width="otherproduct.itw"
-                      :height="otherproduct.ith"
-                      @click="viewfieldset[product.id] = !viewfieldset[product.id]"
-                    />
-                    {{ otherproduct.name }}
-                  </div>
-                </option>
-              </select>
+                  <img
+                    src="/img/select.svg"
+                    @click="
+                      ((viewfieldset[product.id] = !viewfieldset[product.id]),
+                      changeproductlist(product.id, otherproduct.id),
+                      productSetUniq())
+                    "
+                  />
+                  <img
+                    :src="`/img/th/${otherproduct.id}.png`"
+                    :alt="otherproduct.id"
+                    :width="otherproduct.itw"
+                    :height="otherproduct.ith"
+                    @click="viewfieldset[product.id] = !viewfieldset[product.id]"
+                  />
+                  {{ otherproduct.name }}
+                </p>
+              </div>
             </fieldset>
           </td>
         </tr>
@@ -535,14 +529,23 @@ select {
   bottom: 130px;
 }
 select {
-  width: 200px;
+  width: 250px;
 }
 .options {
   display: inline-block;
+  max-height: 20ex;
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-align: left;
+  color: var(--color-text);
+  background-color: var(--color-background-mute);
 }
 .options img {
   display: inline-block;
   vertical-align: middle;
+}
+.options p {
+  text-indent: 0;
 }
 .hidden {
   visibility: hidden;
