@@ -39,7 +39,7 @@ export const useProductStore = defineStore('productStore', {
         price: 27490,
         iw: 117,
         ih: 240,
-        itw: 35,
+        itw: 27,
         ith: 50,
       },
       {
@@ -57,7 +57,7 @@ export const useProductStore = defineStore('productStore', {
         price: 32890,
         iw: 117,
         ih: 240,
-        itw: 38,
+        itw: 26,
         ith: 50,
       },
       {

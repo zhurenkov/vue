@@ -328,8 +328,13 @@ function selecthide() {
               "
               v-show="!viewfieldset[product.id] && otherproduct.length > 0"
             /><!--{{ viewfieldset[product.id] }}-->
-            <fieldset class="selectProd" :id="`${product.id}Sel`" v-show="viewfieldset[product.id]">
-              <input className="phone-search" type="text" />
+            <fieldset
+              class="selectProd"
+              :id="`${product.id}Sel`"
+              v-show="viewfieldset[product.id]"
+              @onmousemove="viewfieldset[product.id] = !viewfieldset[product.id]"
+            >
+              <input className="phone-search" type="search" placeholder="Введите название" />
               <div class="options">
                 <p
                   v-for="otherproduct of otherproduct"
@@ -339,6 +344,7 @@ function selecthide() {
                   @click="viewfieldset[product.id] = !viewfieldset[product.id]"
                 >
                   <img
+                    class="selector"
                     src="/img/select.svg"
                     @click="(changeproductlist(product.id, otherproduct.id), productSetUniq())"
                   />
@@ -478,6 +484,9 @@ td.selected {
   display: inline-block;
   font-size: large;
 }
+#colviews span {
+  cursor: pointer;
+}
 
 fieldset {
   border: none;
@@ -523,8 +532,8 @@ select {
   left: 100px;
   bottom: 130px;
 }
-select {
-  width: 250px;
+input.phone-search {
+  width: 220px;
 }
 .options {
   display: inline-block;
@@ -534,13 +543,18 @@ select {
   text-align: left;
   color: var(--color-text);
   background-color: var(--color-background-mute);
+  width: 220px;
 }
 .options img {
   display: inline-block;
   vertical-align: middle;
 }
+.selector {
+  cursor: pointer;
+}
 .options p {
   text-indent: 0;
+  margin-top: 2px;
 }
 .hidden {
   visibility: hidden;
