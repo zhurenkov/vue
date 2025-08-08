@@ -57,6 +57,7 @@ $('#searchInput').bind('keyup', function() {
 const difnot = ref(true)
 //console.log(difnot.value)
 const numdif = ref(3)
+const searchproduct = ref()
 //console.log(numdif.value)
 //type viewer = [id: string, isVisible: boolean]
 /*
@@ -201,6 +202,16 @@ function productSetUniq() {
 productSetUniq()
 
 /*
+function inList(element: string, str: string) {
+  const start = 0
+  while (start <= element.length) {
+    if (element.includes(str)) {
+      return true
+    }
+  }
+  return false
+}
+
 function selectshow() {
   const elem = document.getElementById('`${product.id}Img`')
   if (elem) {
@@ -332,11 +343,20 @@ function selecthide() {
               class="selectProd"
               :id="`${product.id}Sel`"
               v-show="viewfieldset[product.id]"
-              @onmousemove="viewfieldset[product.id] = !viewfieldset[product.id]"
+              @blur="viewfieldset[product.id] = !viewfieldset[product.id]"
             >
-              <input className="phone-search" type="search" placeholder="Введите название" />
+              <input
+                className="phone-search"
+                type="search"
+                tabindex="1"
+                placeholder="Введите название"
+                v-model="searchproduct"
+                @focus="searchproduct = ''"
+                @input="console.log(searchproduct)"
+              />
               <div class="options">
                 <p
+                  v-show="otherproduct.name.toLowerCase().includes(searchproduct.toLowerCase())"
                   v-for="otherproduct of otherproduct"
                   :key="otherproduct.id"
                   :product="otherproduct"
