@@ -356,7 +356,7 @@ function selecthide() {
               />
               <div class="options">
                 <p
-                  v-show="otherproduct.name.toLowerCase().includes(searchproduct.toLowerCase())"
+                  v-show="otherproduct.name.toLowerCase().includes(searchproduct)"
                   v-for="otherproduct of otherproduct"
                   :key="otherproduct.id"
                   :product="otherproduct"
@@ -436,19 +436,22 @@ function selecthide() {
         <tr v-if="difnot || nfcUniq">
           <th>NFC</th>
           <td v-for="product of difproduct" :key="product.id" :product="product">
-            {{ product.nfc }}
+            <img v-show="product.nfc" class="selector" src="/img/yes.svg" />
+            <img v-show="!product.nfc" class="selector" src="/img/no.svg" />
           </td>
         </tr>
         <tr v-if="difnot || esimUniq">
           <th>Поддержка ESIM</th>
           <td v-for="product of difproduct" :key="product.id" :product="product">
-            {{ product.esim }}
+            <img v-show="product.esim" class="selector" src="/img/yes.svg" />
+            <img v-show="!product.esim" class="selector" src="/img/no.svg" />
           </td>
         </tr>
         <tr v-if="difnot || wchargUniq">
           <th>Поддержка беспроводной зарядки</th>
           <td v-for="product of difproduct" :key="product.id" :product="product">
-            {{ product.wcharg }}
+            <img v-show="product.wcharg" class="selector" src="/img/yes.svg" />
+            <img v-show="!product.wcharg" class="selector" src="/img/no.svg" />
           </td>
         </tr>
         <tr v-if="difnot || priceUniq">
