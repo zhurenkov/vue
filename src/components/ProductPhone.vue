@@ -57,7 +57,7 @@ $('#searchInput').bind('keyup', function() {
 const difnot = ref(true)
 //console.log(difnot.value)
 const numdif = ref(3)
-const searchproduct = ref()
+const searchproduct = ref('')
 //console.log(numdif.value)
 //type viewer = [id: string, isVisible: boolean]
 /*
@@ -308,9 +308,6 @@ function selecthide() {
         <tr id="firstrow">
           <td>
             <fieldset id="viewDiffers">
-              <!--<input type="checkbox" onclick="viewDiffers();" /> Показать различия
-                           v-for="n in numdif"
--->
               <input type="checkbox" @change="difnot = !difnot" />
               Показать различия
             </fieldset>
@@ -339,24 +336,25 @@ function selecthide() {
               "
               v-show="!viewfieldset[product.id] && otherproduct.length > 0"
             /><!--{{ viewfieldset[product.id] }}-->
-            <fieldset
+            <div
               class="selectProd"
               :id="`${product.id}Sel`"
               v-show="viewfieldset[product.id]"
-              @blur="viewfieldset[product.id] = !viewfieldset[product.id]"
+              @mouseenter="searchproduct = ''"
+              @mouseleave="viewfieldset[product.id] = !viewfieldset[product.id]"
             >
               <input
                 className="phone-search"
                 type="search"
                 tabindex="1"
-                placeholder="Введите название"
+                placeholder="Поиск"
                 v-model="searchproduct"
                 @focus="searchproduct = ''"
                 @input="console.log(searchproduct)"
               />
               <div class="options">
                 <p
-                  v-show="otherproduct.name.toLowerCase().includes(searchproduct)"
+                  v-show="otherproduct.name.toLowerCase().includes(searchproduct.toLowerCase())"
                   v-for="otherproduct of otherproduct"
                   :key="otherproduct.id"
                   :product="otherproduct"
@@ -377,7 +375,7 @@ function selecthide() {
                   {{ otherproduct.name }}
                 </p>
               </div>
-            </fieldset>
+            </div>
           </td>
         </tr>
       </thead>
@@ -467,13 +465,30 @@ function selecthide() {
 
 <style>
 table {
+  /*
+  position: absolute;
+  left: 165px;
+  top: 260px;
+  background-color: var(--color-background-mute);
+  */
+  width: calc-size(100%-75px);
+  padding: 0px 0px 60px 90px;
+  margin-top: 15rem;
+  margin-left: 165px;
+  border-collapse: collapse;
+}
+
+tbody {
   width: 100%;
+  padding: 0px 0px 60px 90px;
+  margin-top: 15rem;
+  background-color: var(--color-background-mute);
 }
 
 tr {
   height: 60px;
   background-color: var(--color-background-mute);
-  border-top: 2px solid var(--color-heading);
+  border-top: 1px solid var(--color-heading);
 }
 
 th {
@@ -492,6 +507,7 @@ td {
 
 #firstrow {
   background-color: var(--color-background);
+  border-top: none;
 }
 
 #firstrow > td {
@@ -505,7 +521,19 @@ td.selected {
 #colviews {
   color: #0d5adc;
   display: inline-block;
-  font-size: large;
+  /* Отобразить товары: 2 3 4 5 6
+    width: 263px;
+  height: 43px;
+ */
+  position: absolute;
+  left: 73%;
+  top: 160px;
+
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 60px;
+  /* or 333% */
+  letter-spacing: 0.02em;
 }
 #colviews span {
   cursor: pointer;
@@ -514,6 +542,10 @@ td.selected {
 fieldset {
   border: none;
   color: #0d5adc;
+}
+
+#viewDiffers {
+  padding-bottom: 40px;
 }
 
 figure {
@@ -543,20 +575,22 @@ select {
 
 .selectProd {
   text-align: right;
-  width: 0px;
-  height: 0px;
+  width: 30px;
+  height: 34px;
   position: relative;
   z-index: 2;
-  left: 200px;
-  bottom: 180px;
+  left: 100px;
+  bottom: 80px;
 }
 .selectImg {
   position: relative;
-  left: 100px;
-  bottom: 130px;
+  left: 60px;
+  bottom: 80px;
 }
 input.phone-search {
   width: 220px;
+  color: var(--color-text);
+  background-color: var(--color-background);
 }
 .options {
   display: inline-block;
@@ -565,7 +599,7 @@ input.phone-search {
   overflow-x: hidden;
   text-align: left;
   color: var(--color-text);
-  background-color: var(--color-background-mute);
+  background-color: var(--color-background);
   width: 220px;
 }
 .options img {
