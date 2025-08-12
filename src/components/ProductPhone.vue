@@ -4,6 +4,7 @@ import { useProductStore } from '@/stores/ProductStore'
 //import { useProductStore } from '@/data/products.json'
 //import SelectSearch from '@/components/SelectSearch.vue'
 const productStore = useProductStore()
+//import Popover from 'primevue/popover';
 
 interface productStore {
   id: string
@@ -67,6 +68,13 @@ interface viewer {
 const viewfieldset: viewer[] //ref(false)
 */
 const viewfieldset: { [id: string]: boolean } = reactive({})
+function viewFieldReset() {
+  //  document.getElementById('`${product.id}Sel`').showModal()
+  for (const id in viewfieldset) {
+    if (viewfieldset[id] == true) viewfieldset[id] = false
+  }
+  //  console.log(viewfieldset)
+}
 //viewfieldset["iP"]=true
 //const shown = ref()
 /*
@@ -236,8 +244,8 @@ function selecthide() {
 </script>
 
 <template>
-  <h1>Смартфоны</h1>
-  <p id="colviews">
+  <h1 @click="viewFieldReset()">Смартфоны</h1>
+  <p id="colviews" @click="viewFieldReset()">
     Отобразить товары:
     <span
       @click="
@@ -302,7 +310,7 @@ function selecthide() {
   <div>
     <v-select no-drop taggable multiple :select-on-key-codes="[188, 13]" />
   </div>-->
-  <main id="app">
+  <main @click="viewFieldReset()">
     <table>
       <thead>
         <tr id="firstrow">
@@ -313,6 +321,7 @@ function selecthide() {
             </fieldset>
           </td>
           <td class="selected" v-for="product of difproduct" :key="product.id" :product="product">
+            <!-- @click.self="console.log(viewfieldset[product.id])"-->
             <figure>
               <img
                 :src="`/img/${product.id}.jpg`"
@@ -324,6 +333,7 @@ function selecthide() {
             </figure>
             <!--<SelectSearch> <cool-select v-model="selected" :items="items" /></SelectSearch>-->
             <img
+              @click.stop
               class="selectImg"
               :id="`${product.id}Img`"
               src="/img/selectProd.svg"
@@ -341,18 +351,24 @@ function selecthide() {
               :id="`${product.id}Sel`"
               v-show="viewfieldset[product.id]"
               @mouseenter="searchproduct = ''"
-              @mouseleave="viewfieldset[product.id] = !viewfieldset[product.id]"
+              @clickaway="viewfieldset[product.id] = !viewfieldset[product.id]"
             >
-              <input
-                className="phone-search"
-                type="search"
-                tabindex="1"
-                placeholder="Поиск"
-                v-model="searchproduct"
-                @focus="searchproduct = ''"
-                @input="console.log(searchproduct)"
-              />
-              <div class="options">
+              <!--
+              v-click-outside="viewFieldReset()"
+            @mouseleave="viewfieldset[product.id] = !viewfieldset[product.id]"
+            -->
+              <div class="selectFrame">
+                <input
+                  className="phone-search"
+                  type="search"
+                  tabindex="1"
+                  placeholder="Поиск"
+                  v-model="searchproduct"
+                  @focus="searchproduct = ''"
+                  @input="console.log(searchproduct)"
+                  @click.stop
+                />
+                <!--<div class="options">-->
                 <p
                   v-show="otherproduct.name.toLowerCase().includes(searchproduct.toLowerCase())"
                   v-for="otherproduct of otherproduct"
@@ -374,6 +390,7 @@ function selecthide() {
                   />
                   {{ otherproduct.name }}
                 </p>
+                <!--</div>-->
               </div>
             </div>
           </td>
@@ -476,6 +493,8 @@ table {
   margin-top: 15rem;
   margin-left: 165px;
   border-collapse: collapse;
+  position: relative;
+  z-index: 1;
 }
 
 tbody {
@@ -579,18 +598,54 @@ select {
   height: 34px;
   position: relative;
   z-index: 2;
-  left: 100px;
-  bottom: 80px;
+  left: 0px;
+  bottom: 90px;
 }
+
+.selectFrame {
+  width: 421px;
+  height: 336px;
+  box-sizing: border-box;
+  border: 1px solid var(--color-background-soft);
+  border-radius: 4px;
+  color: var(--color-text);
+  background-color: var(--color-background);
+  box-shadow: 0px 16px 32px var(--shadow-border);
+  /* #596382 | #a69c7d */
+  text-align: left;
+  display: inline-block;
+  max-height: 336px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-size: 18px;
+  line-height: 40px;
+  /* or 222% */
+  font-feature-settings:
+    'pnum' on,
+    'lnum' on;
+
+  vertical-align: middle;
+}
+
 .selectImg {
   position: relative;
   left: 60px;
   bottom: 80px;
 }
 input.phone-search {
-  width: 220px;
-  color: var(--color-text);
+  width: 364px;
+  height: 47px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  color: var(--color-grey);
   background-color: var(--color-background);
+  margin: 20px;
+  border: 1px solid var(--color-grey);
+  border-radius: 4px;
+  /*
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+  */
 }
 .options {
   display: inline-block;
@@ -602,24 +657,17 @@ input.phone-search {
   background-color: var(--color-background);
   width: 220px;
 }
-.options img {
+.selectFrame p img {
   display: inline-block;
   vertical-align: middle;
+  margin: 15px 20px 15px 0px;
 }
 .selector {
   cursor: pointer;
+  padding: 15px 0px 15px 20px;
 }
 .options p {
   text-indent: 0;
   margin-top: 2px;
-}
-.hidden {
-  visibility: hidden;
-  /*
-  display: none;
-  */
-}
-.unhidden {
-  visibility: visible;
 }
 </style>

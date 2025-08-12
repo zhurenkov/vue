@@ -64,7 +64,7 @@ left: 1500px;
 top: 43px;
 */
 position: absolute;
-left:73%;
+left:70%;
 top: 35%;
   }
 
@@ -85,7 +85,7 @@ line-height: 14px;
 color: #3B4157;
  */
 letter-spacing: 0.02em;
-left:83%;
+left:80%;
 top: 45%;
   }
 
