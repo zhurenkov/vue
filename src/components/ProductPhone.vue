@@ -338,7 +338,8 @@ function selecthide() {
               :id="`${product.id}Img`"
               src="/img/selectProd.svg"
               @click="
-                ((viewfieldset[product.id] = !viewfieldset[product.id]),
+                (viewFieldReset(),
+                (viewfieldset[product.id] = !viewfieldset[product.id]),
                 //                logger(product.id + viewfieldset[product.id].toString()),
                 otherproductlist())
                 //  console.log(viewfieldset),
@@ -365,10 +366,11 @@ function selecthide() {
                   placeholder="Поиск"
                   v-model="searchproduct"
                   @focus="searchproduct = ''"
-                  @input="console.log(searchproduct)"
                   @click.stop
                 />
-                <!--<div class="options">-->
+                <!--
+                  @input="console.log(searchproduct)"
+                  <div class="options">-->
                 <p
                   v-show="otherproduct.name.toLowerCase().includes(searchproduct.toLowerCase())"
                   v-for="otherproduct of otherproduct"
@@ -640,13 +642,14 @@ input.phone-search {
   line-height: 28px;
   color: var(--color-grey);
   background-color: var(--color-background);
-  margin: 20px;
+  margin: 30px 50px 10px 20px;
   border: 1px solid var(--color-grey);
   border-radius: 4px;
   /*
   transform: matrix(-1, 0, 0, 1, 0, 0);
   */
 }
+/*
 .options {
   display: inline-block;
   max-height: 20ex;
@@ -657,6 +660,7 @@ input.phone-search {
   background-color: var(--color-background);
   width: 220px;
 }
+  */
 .selectFrame p img {
   display: inline-block;
   vertical-align: middle;
